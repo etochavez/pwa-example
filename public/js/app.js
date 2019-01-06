@@ -82,7 +82,7 @@ const camara = new Camara($('#player')[0]);
 
 // ===== Codigo de la aplicación
 
-function crearMensajeHTML(mensaje, personaje, lat, lng/*, foto*/) {
+function crearMensajeHTML(mensaje, personaje, lat, lng, foto) {
 
     // console.log(mensaje, personaje, lat, lng);
 
@@ -101,12 +101,12 @@ function crearMensajeHTML(mensaje, personaje, lat, lng/*, foto*/) {
                 ${ mensaje }
                 `;
     
-    /*if ( foto ) {
+    if ( foto ) {
         content += `
                 <br>
                 <img class="foto-mensaje" src="${ foto }">
         `;
-    }*/
+    }
         
     content += `</div>        
                 <div class="arrow"></div>
@@ -247,7 +247,7 @@ postBtn.on('click', function() {
         user: usuario,
         lat: lat,
         lng: lng,
-        //foto: foto
+        foto: foto
     };
 
 
@@ -265,7 +265,7 @@ postBtn.on('click', function() {
     //camera.apagar();
     //contenedorCamara.addClass('oculto');
 
-    crearMensajeHTML( mensaje, usuario, lat, lng/*, foto*/ );
+    crearMensajeHTML( mensaje, usuario, lat, lng, foto );
     
     foto = null;
 });
