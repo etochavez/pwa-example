@@ -88,6 +88,8 @@ function crearMensajeHTML(mensaje, personaje, lat, lng, foto) {
 
     var content =`
     <li class="animated fadeIn fast"
+        data-user="${personaje}"
+        data-mensaje="${ mensaje }"
         data-tipo="mensaje">
 
 
@@ -525,6 +527,35 @@ btnTomarFoto.on('click', () => {
 
 
 // Share API
+
+if(navigator.share){
+    timeline.on('click', 'li', function(){
+        let tipo = $(this).data('tipo');
+        let lat = $(this).data('lat');
+        let lng = $(this).data('lng');
+        let mensaje = $(this).data('mensaje');
+        let user = $(this).data('user');
+
+        console.log({ tipo, lat, lng, mensaje, user  });
+
+        const sharOpts = {
+            title: user,
+            text: mensaje
+        };
+
+        if ( tipo === 'mapa') {
+            sharOpts.text = 'Mapa',
+            sharOpts.url = `https://www.google.com/maps/@${lat},${lng},15z`;
+        }
+
+        navigator.share({sharOpts})
+          .then(() => console.log('Successful share'))
+          .catch((error) => console.log('Error sharing', error));
+    });
+    
+} else {
+    console.log('navegador no lo soporta');
+}
 
 
 
